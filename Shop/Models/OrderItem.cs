@@ -15,10 +15,15 @@ namespace Shop.Models
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
 
+        public DateTime Date 
+        {
+            get { return Date; } 
+            set => Date = DateTime.Now; 
+        }
         public DateTime DeliveryDate
         {
             get { return DeliveryDate; }
-            set => DeliveryDate = value.AddDays(5);
+            set => Date = value.AddDays(5);
         }
     }
 }

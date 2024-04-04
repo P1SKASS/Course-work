@@ -13,6 +13,18 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\image\\facebook_icon.png",
+      "PackagePath": "staticwebassets\\image\\facebook_icon.png"
+    },
+    {
+      "Id": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\image\\instagram_icon.png",
+      "PackagePath": "staticwebassets\\image\\instagram_icon.png"
+    },
+    {
+      "Id": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\image\\linkedin_icon.png",
+      "PackagePath": "staticwebassets\\image\\linkedin_icon.png"
+    },
+    {
       "Id": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

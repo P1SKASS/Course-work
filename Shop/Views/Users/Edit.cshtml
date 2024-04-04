@@ -33,6 +33,11 @@
                 <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+            <label class="form-check-label control-label">
+                <p>Entrepreneur?</p>
+                <input type="checkbox" asp-for="Entrepreneur" class="form-check-input" />
+                </label>
+                <span asp-validation-for="Entrepreneur" class="text-danger"></span>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

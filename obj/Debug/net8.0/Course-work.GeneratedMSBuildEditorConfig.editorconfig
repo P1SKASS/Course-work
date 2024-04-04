@@ -1,0 +1,155 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Course_work
+build_property.RootNamespace = Course_work
+build_property.ProjectDir = C:\Program\Unik lab\Course-work\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Program\Unik lab\Course-work
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Program/Unik lab/Course-work/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Pages/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xIb21lXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xIb21lXFByaXZhY3kuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/OrderItems/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xPcmRlckl0ZW1zXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/OrderItems/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xPcmRlckl0ZW1zXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/OrderItems/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xPcmRlckl0ZW1zXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/OrderItems/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xPcmRlckl0ZW1zXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/OrderItems/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xPcmRlckl0ZW1zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Orders/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xPcmRlcnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Orders/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xPcmRlcnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Orders/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xPcmRlcnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Orders/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xPcmRlcnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Orders/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xPcmRlcnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Products/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xQcm9kdWN0c1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Products/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xQcm9kdWN0c1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Products/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xQcm9kdWN0c1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Products/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xQcm9kdWN0c1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Products/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xQcm9kdWN0c1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xTaGFyZWRcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xTaGFyZWRcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Users/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xVc2Vyc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Users/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xVc2Vyc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Users/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xVc2Vyc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Users/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xVc2Vyc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Users/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xVc2Vyc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Shop/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xfVmlld1N0YXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Program/Unik lab/Course-work/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-c9voebiuxm
+
+[C:/Program/Unik lab/Course-work/Shop/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2hvcFxWaWV3c1xTaGFyZWRcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-kzbefabjjo
