@@ -30,6 +30,10 @@ body {
     padding: 0;
 }
 
+header{
+    padding: 0 20px;
+}
+
 .footer-content {
     display: flex;
     justify-content: center;

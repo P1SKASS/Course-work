@@ -4,7 +4,6 @@ using Shop.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<SiteContex>(options =>
 {
@@ -13,11 +12,23 @@ builder.Services.AddDbContext<SiteContex>(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+var optionsBuilder = new DbContextOptionsBuilder<SiteContex>();
+optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Course-work;Integrated Security=True;Encrypt=True");
+
+using (var context = new SiteContex(optionsBuilder.Options))
+{
+    var users = context.Users.ToList();
+
+    Console.WriteLine("Users:");
+    foreach (var user in users)
+    {
+        Console.WriteLine($"Id: {user.Id},Name: {user.Name} ,Email: {user.Mail}, Password: {user.Password}");
+    }
+}
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -30,6 +41,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();
