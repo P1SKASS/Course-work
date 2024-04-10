@@ -5,7 +5,7 @@ namespace Shop.Models
     public class UserLoginModel
     {
         [Required]
-        public required string Name { get; set; }
+        public required string Login { get; set; }
 
         [Required(ErrorMessage = "Enter password")]
         [DataType(DataType.Password)]

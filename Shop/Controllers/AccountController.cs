@@ -21,9 +21,9 @@ namespace Shop.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string name, string password)
+        public async Task<IActionResult> Login(string login, string password)
         {
-            var users = _context.Users.Where(u => u.Name == name).ToList();
+            var users = _context.Users.Where(u => u.Login == login).ToList();
 
             foreach (var user in users)
             {
@@ -33,7 +33,7 @@ namespace Shop.Controllers
                 }
             }
 
-            TempData["ErrorMessage"] = "Wrong email or password.";
+            TempData["ErrorMessage"] = "Wrong login or password.";
             return RedirectToAction("Login");
         }
 

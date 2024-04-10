@@ -8,10 +8,7 @@ namespace Shop.Models
         public int Id {  get; set; }
 
         [Required]
-        public string Name { get; set; }
-
-        [Required]
-        public string SecondName { get; set; }
+        public string Login { get; set; }
 
         [Required]
         public string Mail { get; set; }

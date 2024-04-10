@@ -22,7 +22,7 @@ using (var context = new SiteContex(optionsBuilder.Options))
     Console.WriteLine("Users:");
     foreach (var user in users)
     {
-        Console.WriteLine($"Id: {user.Id},Name: {user.Name} ,Email: {user.Mail}, Password: {user.Password}");
+        Console.WriteLine($"Id: {user.Id},Name: {user.Login} ,Email: {user.Mail}, Password: {user.Password}");
     }
 }
 

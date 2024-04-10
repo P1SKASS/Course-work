@@ -48,7 +48,7 @@ namespace Shop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,SecondName,Mail,Password,Entrepreneur")] User user)
+        public async Task<IActionResult> Create([Bind("Id,Login,Mail,Password,Entrepreneur")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -76,7 +76,7 @@ namespace Shop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,SecondName,Mail,Password,Entrepreneur")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Login,Mail,Password,Entrepreneur")] User user)
         {
             if (id != user.Id)
             {
