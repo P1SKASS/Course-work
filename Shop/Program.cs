@@ -1,30 +1,29 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Shop.Models;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<SiteContex>(options =>
 {
     options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Course-work;Integrated Security=True;Encrypt=True");
 });
 
-var app = builder.Build();
-
-var optionsBuilder = new DbContextOptionsBuilder<SiteContex>();
-optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Course-work;Integrated Security=True;Encrypt=True");
-
-using (var context = new SiteContex(optionsBuilder.Options))
+builder.Services.AddSession(options =>
 {
-    var users = context.Users.ToList();
+    options.Cookie.Name = ".Shop.Session";
+    options.IdleTimeout = TimeSpan.FromSeconds(3600);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
-    Console.WriteLine("Users:");
-    foreach (var user in users)
-    {
-        Console.WriteLine($"Id: {user.Id},Name: {user.Login} ,Email: {user.Mail}, Password: {user.Password}");
-    }
-}
+var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
@@ -34,6 +33,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseSession();
 
 app.UseRouting();
 

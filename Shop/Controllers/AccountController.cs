@@ -29,6 +29,7 @@ namespace Shop.Controllers
             {
                 if (user.Password == password)
                 {
+                    HttpContext.Session.SetInt32("UserId", user.Id);
                     return RedirectToAction("Index", "Products");
                 }
             }

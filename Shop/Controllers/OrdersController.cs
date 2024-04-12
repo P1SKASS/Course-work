@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Shop.Models;
+using Shop.Attributes;
 
 namespace Shop.Controllers
 {
@@ -40,6 +41,7 @@ namespace Shop.Controllers
             return View(order);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             return View();
