@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using Shop.Attributes;
 using Shop.Models;
 
 namespace Shop.Controllers
@@ -40,9 +42,22 @@ namespace Shop.Controllers
             return View(product);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
-            return View();
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId.HasValue)
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+
+                if (user != null && user.Entrepreneur)
+                {
+                    return View();
+                }
+            }
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

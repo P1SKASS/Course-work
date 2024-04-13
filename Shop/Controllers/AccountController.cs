@@ -40,6 +40,7 @@ namespace Shop.Controllers
 
         public IActionResult Logout()
         {
+            HttpContext.Session.Remove("UserId");
             return RedirectToAction("Login");
         }
     }
