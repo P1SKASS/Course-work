@@ -51,7 +51,7 @@ namespace Shop.Controllers
             {
                 var user = _context.Users.FirstOrDefault(u => u.Id == userId);
 
-                if (user != null && user.Entrepreneur)
+                if (user != null && user.Entrepreneur || user.Administrator)
                 {
                     return View();
                 }
@@ -73,19 +73,33 @@ namespace Shop.Controllers
             return View(product);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId.HasValue)
             {
-                return NotFound();
+                var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+
+                if (user != null && user.Entrepreneur || user.Administrator)
+                {
+                    if (id == null)
+                    {
+                        return NotFound();
+                    }
+
+                    var product = await _context.Products.FindAsync(id);
+                    if (product == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return View(product);
+                }
             }
 
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            return View(product);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -120,21 +134,35 @@ namespace Shop.Controllers
             return View(product);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
 
-            return View(product);
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId.HasValue)
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+
+                if (user != null && user.Entrepreneur || user.Administrator)
+                {
+                    if (id == null)
+                    {
+                        return NotFound();
+                    }
+
+                    var product = await _context.Products
+                        .FirstOrDefaultAsync(m => m.Id == id);
+                    if (product == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return View(product);
+                }
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpPost, ActionName("Delete")]

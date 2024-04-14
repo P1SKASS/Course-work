@@ -11,14 +11,17 @@ using Shop.Models;
 
 namespace Shop.Controllers
 {
+
     public class UsersController : Controller   
     {
         private readonly SiteContex _context;
+
 
         public UsersController(SiteContex context)
         {
             _context = context;
         }
+
 
         [Authorize]
         public async Task<IActionResult> Index(int Id)
@@ -29,7 +32,7 @@ namespace Shop.Controllers
             {
                 var user = _context.Users.FirstOrDefault(u => u.Id == userId);
 
-                if (user.Id == 1)
+                if (user.Administrator == true)
                 {
                     return View(await _context.Users.ToListAsync());
                 }
@@ -43,23 +46,33 @@ namespace Shop.Controllers
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
 
-            if(userId != 1)
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            if (!user.Administrator)
+            {
                 id = userId;
+            }
 
             if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            var detailsUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+
+            if (detailsUser == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(detailsUser);
         }
+
 
         public IActionResult Create()
         {
@@ -84,23 +97,34 @@ namespace Shop.Controllers
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
 
-            if (userId != 1)
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            if (!user.Administrator)
+            {
                 id = userId;
+            }
 
             if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var EditUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+
+            if (EditUser == null)
             {
                 return NotFound();
             }
-            return View(user);
+
+            return View(EditUser);
         }
 
-        [HttpPost]
+    [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Login,Mail,Password,Entrepreneur")] User user)
         {

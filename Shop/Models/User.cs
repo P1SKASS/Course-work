@@ -17,5 +17,7 @@ namespace Shop.Models
         public string Password { get; set; }
 
         public bool Entrepreneur { get; set; }
+
+        public bool Administrator { get;private set; }
     }
 }

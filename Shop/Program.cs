@@ -37,7 +37,9 @@ using (var scope = app.Services.CreateScope())
         Console.WriteLine("Users:");
     foreach (var user in users)
     {
-        Console.WriteLine($"Id: {user.Id}, Login: {user.Login}, Email: {user.Mail}, Password: {user.Password}, Entrepreneur: {user.Entrepreneur}");
+        Console.WriteLine($"Id: {user.Id}, Login: {user.Login}," +
+            $" Email: {user.Mail}, Password: {user.Password}," +
+            $" Entrepreneur: {user.Entrepreneur}, Admin: {user.Administrator}");
     }
 }
 
