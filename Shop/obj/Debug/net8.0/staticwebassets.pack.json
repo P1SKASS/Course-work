@@ -9,10 +9,6 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\favicon.ico",
-      "PackagePath": "staticwebassets\\favicon.ico"
-    },
-    {
       "Id": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\image\\facebook_icon.png",
       "PackagePath": "staticwebassets\\image\\facebook_icon.png"
     },

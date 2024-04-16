@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fkpX0Q8x7l7Xu9DiTtP4K4GAth3Ou/iJ1oQpCh266Xc=",
+  "Hash": "XNkJXY56j6WDyLWdAMGTtI8Ua4sK/2uiSzySIgf2tBc=",
   "Source": "Shop",
   "BasePath": "_content/Shop",
   "Mode": "Default",
@@ -72,25 +72,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
-    },
-    {
-      "Identity": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\favicon.ico",
-      "SourceId": "Shop",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\",
-      "BasePath": "_content/Shop",
-      "RelativePath": "favicon.ico",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
       "Identity": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\image\\facebook_icon.png",

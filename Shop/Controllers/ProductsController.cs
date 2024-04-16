@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,24 @@ namespace Shop.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Products.ToListAsync());
+        }
+
+        [Authorize]
+        public async Task<IActionResult> IndexForAdmin()
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId.HasValue)
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+
+                if (user != null && user.Administrator)
+                {
+                    var products = await _context.Products.ToListAsync();
+                    return View(products);
+                }
+            }
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -51,7 +70,7 @@ namespace Shop.Controllers
             {
                 var user = _context.Users.FirstOrDefault(u => u.Id == userId);
 
-                if (user != null && user.Entrepreneur || user.Administrator)
+                if (user != null && (user.Entrepreneur || user.Administrator))
                 {
                     return View();
                 }
@@ -62,7 +81,7 @@ namespace Shop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Image,Name,Price,Description")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,Description")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +101,7 @@ namespace Shop.Controllers
             {
                 var user = _context.Users.FirstOrDefault(u => u.Id == userId);
 
-                if (user != null && user.Entrepreneur || user.Administrator)
+                if (user != null && (user.Administrator))
                 {
                     if (id == null)
                     {
@@ -104,7 +123,7 @@ namespace Shop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Image,Name,Price,Description")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Description")] Product product)
         {
             if (id != product.Id)
             {
@@ -145,7 +164,7 @@ namespace Shop.Controllers
             {
                 var user = _context.Users.FirstOrDefault(u => u.Id == userId);
 
-                if (user != null && user.Entrepreneur || user.Administrator)
+                if (user != null && (user.Administrator))
                 {
                     if (id == null)
                     {
