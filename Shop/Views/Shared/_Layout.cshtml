@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Shop.styles.css" asp-append-version="true" />
-
+    <script async src="~/js/site.js"></script>
 </head>
 <body>
     <header>
@@ -23,7 +23,7 @@
                     </ul>
                 <ul class="navbar-nav">
                     <li>
-                        <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+                        <a class="nav-link text-white" id="login" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
                     </li>
                     <li>
                     <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>

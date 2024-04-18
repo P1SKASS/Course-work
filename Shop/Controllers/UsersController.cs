@@ -12,7 +12,7 @@ using Shop.Models;
 namespace Shop.Controllers
 {
 
-    public class UsersController : Controller   
+    public class UsersController : Controller
     {
         private readonly SiteContex _context;
 
@@ -124,7 +124,7 @@ namespace Shop.Controllers
             return View(EditUser);
         }
 
-    [HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Login,Mail,Password,Entrepreneur")] User user)
         {
