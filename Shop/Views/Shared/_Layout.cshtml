@@ -11,8 +11,8 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3">
-                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Shop</a>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light">
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Products" asp-action="Index">Shop</a>
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -21,8 +21,14 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
-                </div>
-            </div>
+                <ul class="navbar-nav">
+                    <li>
+                        <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+                    </li>
+                    <li>
+                    <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
+                    </li>
+                </ul>
         </nav>
     </header>
     <div class="container">
