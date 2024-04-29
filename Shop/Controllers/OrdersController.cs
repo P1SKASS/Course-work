@@ -24,6 +24,29 @@ namespace Shop.Controllers
             return View(await _context.Orders.ToListAsync());
         }
 
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> PlaceOrder(Order order)
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId.HasValue)
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+                if (ModelState.IsValid)
+                {
+                    order.UserId = (int)userId;
+                    order.Status = "Processing";
+                    _context.Orders.Add(order);
+                    await _context.SaveChangesAsync();
+
+                    return View("OrderConfirmation", order);
+                }
+                return View("OrderForm", order);
+            }
+            return RedirectToAction("Index");
+        }
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,7 +72,7 @@ namespace Shop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrderDate,Status")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,PostOffice,Status")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -77,7 +100,7 @@ namespace Shop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderDate,Status")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,PostOffice,Status")] Order order)
         {
             if (id != order.Id)
             {
