@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Shop.Models;
 using Shop.Attributes;
+using Newtonsoft.Json.Linq;
 
 namespace Shop.Controllers
 {
@@ -25,27 +26,48 @@ namespace Shop.Controllers
         }
 
         [Authorize]
-        [HttpPost]
-        public async Task<IActionResult> PlaceOrder(Order order)
+        public async Task<IActionResult> PlaceOrder(int id)
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
 
             if (userId.HasValue)
             {
                 var user = _context.Users.FirstOrDefault(u => u.Id == userId);
-                if (ModelState.IsValid)
-                {
-                    order.UserId = (int)userId;
-                    order.Status = "Processing";
-                    _context.Orders.Add(order);
-                    await _context.SaveChangesAsync();
+                var order = _context.Orders.FirstOrDefault(o => o.UserId == userId);
 
-                    return View("OrderConfirmation", order);
+                var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+
+                if (product != null && ModelState.IsValid)
+                {
+                    if (order == null)
+                    {
+                        order = new Order
+                        {
+                            UserId = userId.Value,
+                            Status = "Processing",
+                            Date = DateTime.Now,
+                            DeliveryDate = DateTime.Now.AddDays(5)
+                        };
+                        _context.Orders.Add(order);
+                    }
+                    else
+                        order.Status = "Processing";
+
+                    var newOrderItem = new OrderItem
+                    {
+                        OrderId = order.Id,
+                        ProductId = id,
+                        Quantity = 1,
+                        UnitPrice = product.Price
+                    };
+
+                    _context.OrderItems.Add(newOrderItem);
+                    await _context.SaveChangesAsync();
                 }
-                return View("OrderForm", order);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Products");
         }
+
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -72,7 +94,7 @@ namespace Shop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PostOffice,Status")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,Status")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +122,7 @@ namespace Shop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PostOffice,Status")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Status")] Order order)
         {
             if (id != order.Id)
             {

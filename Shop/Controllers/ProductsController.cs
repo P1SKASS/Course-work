@@ -198,6 +198,42 @@ namespace Shop.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        [Authorize]
+        public async Task<IActionResult> Buy(int id)
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId.HasValue)
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+
+                if (user != null)
+                {
+                    var existingOrder = _context.Orders.FirstOrDefault(o => o.UserId == userId);
+                    if (existingOrder == null)
+                    {
+                        var newOrder = new Order
+                        {
+                            UserId = (int)userId,
+                            Status = "New",
+                            Date = DateTime.Now,
+                            DeliveryDate = DateTime.Now.AddDays(5)
+                        };
+
+                        _context.Orders.Add(newOrder);
+                        await _context.SaveChangesAsync();
+                    }
+
+                    return RedirectToAction("PlaceOrder", "Orders", new { id = id });
+                }
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Products");
+        }
+
+
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.Id == id);
