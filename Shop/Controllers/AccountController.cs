@@ -30,6 +30,7 @@ namespace Shop.Controllers
                 if (user.Password == password)
                 {
                     HttpContext.Session.SetInt32("UserId", user.Id);
+                    HttpContext.Session.SetString("UserLogin", user.Login);
                     return RedirectToAction("Index", "Products");
                 }
             }
@@ -41,6 +42,7 @@ namespace Shop.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("UserId");
+            HttpContext.Session.SetString("UserLogin", "Log in");
             return RedirectToAction("Login");
         }
     }

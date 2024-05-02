@@ -23,6 +23,9 @@ namespace Shop.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            ViewBag.LoggedInUser = user;
             return View(await _context.Products.ToListAsync());
         }
 
@@ -57,6 +60,10 @@ namespace Shop.Controllers
             {
                 return NotFound();
             }
+
+            var userId = HttpContext.Session.GetInt32("UserId");
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            ViewBag.LoggedInUser = user;
 
             return View(product);
         }

@@ -1,23 +1,32 @@
 ﻿@model Shop.Models.UserLoginModel
 
-<form asp-controller="Account" asp-action="Login" method="post">
-    <div>
-        <label asp-for="Login"></label>
-        <input asp-for="Login" />
-        <span asp-validation-for="Login"></span>
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form asp-controller="Account" asp-action="Login" method="post">
+            <div class="form-group">
+                <input asp-for="Login" class="form-control" placeholder="Username" required autofocus>
+                <span asp-validation-for="Login" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Password" class="form-control" type="password" placeholder="Password" required>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-login">Login</button>
+        </form>
+        <p class="mt-3">
+            <a class="text-decoration-none" asp-controller="Users" asp-action="Create">Create Account?</a>
+        </p>
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert" role="alert">
+                @TempData["ErrorMessage"]
+            </div>
+        }
     </div>
-    <div>
-        <label asp-for="Password"></label>
-        <input asp-for="Password" type="password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-    <button type="submit">Login</button>
-
-    @if (TempData["ErrorMessage"] != null)
-    {
-        <div class="alert alert-danger" role="alert">
-            @TempData["ErrorMessage"]
-        </div>
-    }
-
-</form>
+</body>

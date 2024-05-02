@@ -25,6 +25,7 @@ header {
 }
 
 body {
+    background-color: whitesmoke;   
     margin-bottom: 60px;
     font-family: 'Times New Roman', sans-serif;
     padding: 0;

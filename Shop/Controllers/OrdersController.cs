@@ -51,22 +51,36 @@ namespace Shop.Controllers
                         _context.Orders.Add(order);
                     }
                     else
-                        order.Status = "Processing";
-
-                    var newOrderItem = new OrderItem
                     {
-                        OrderId = order.Id,
-                        ProductId = id,
-                        Quantity = 1,
-                        UnitPrice = product.Price
-                    };
+                        order.Status = "Processing";
+                    }
 
-                    _context.OrderItems.Add(newOrderItem);
+                    var productInOrder = await _context.OrderItems.FirstOrDefaultAsync(p => p.ProductId == id && p.Order.UserId == userId);
+
+                    if (productInOrder != null)
+                    {
+                        productInOrder.Quantity += 1;
+                    }
+                    else
+                    {
+                        var newOrderItem = new OrderItem
+                        {
+                            OrderId = order.Id,
+                            ProductId = id,
+                            Quantity = 1,
+                            UnitPrice = product.Price
+                        };
+
+                        _context.OrderItems.Add(newOrderItem);
+                    }
+
                     await _context.SaveChangesAsync();
                 }
             }
+
             return RedirectToAction("Index", "Products");
         }
+
 
 
         public async Task<IActionResult> Details(int? id)

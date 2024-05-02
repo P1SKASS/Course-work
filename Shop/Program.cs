@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Shop.Models;
 using System;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +20,6 @@ builder.Services.AddDbContext<SiteContex>(options =>
 {
     options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Course-work;Integrated Security=True;Encrypt=True");
 });
-
 
 builder.Services.AddSession(options =>
 {
