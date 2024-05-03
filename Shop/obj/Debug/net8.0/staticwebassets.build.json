@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+dYNkNgtVT6gHPLj6Wd3IT/qHbXsatvpe/RndPHTL0s=",
+  "Hash": "ZJXqNS7lVchU5KkwpYetSoSH+scIhCy+/oZuWLsERoM=",
   "Source": "Shop",
   "BasePath": "_content/Shop",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Program\\Unik lab\\Course-work\\Shop\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Shop.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\css\\home.css",
+      "SourceId": "Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\",
+      "BasePath": "_content/Shop",
+      "RelativePath": "css/home.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\home.css"
     },
     {
       "Identity": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\css\\site.css",

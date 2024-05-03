@@ -108,7 +108,7 @@ namespace Shop.Controllers
             {
                 var user = _context.Users.FirstOrDefault(u => u.Id == userId);
 
-                if (user != null && (user.Administrator))
+                if (user != null && user.Administrator)
                 {
                     if (id == null)
                     {
@@ -132,11 +132,6 @@ namespace Shop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Description")] Product product)
         {
-            if (id != product.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
@@ -155,10 +150,11 @@ namespace Shop.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { id = product.Id });
             }
             return View(product);
         }
+
 
         [Authorize]
         public async Task<IActionResult> Delete(int? id)

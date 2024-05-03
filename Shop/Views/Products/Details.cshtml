@@ -1,39 +1,47 @@
 ﻿@model Shop.Models.Product
 
-@{
-    ViewData["Title"] = "Details";
-}
-
-<h1>Details</h1>
-
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-    </dl>
-</div>
-<div>
-    @if (ViewBag.LoggedInUser != null && (ViewBag.LoggedInUser.Entrepreneur || ViewBag.LoggedInUser.Administrator))
-    {
-        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
-    }
-    <a asp-action="Index">Back to List</a>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <div class="details-container">
+        <h1>Details</h1>
+        <div>
+            <h4>Product</h4>
+            <hr>
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            @if (ViewBag.LoggedInUser != null && (ViewBag.LoggedInUser.Entrepreneur || ViewBag.LoggedInUser.Administrator))
+            {
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-details">Edit</a>
+            }
+            <a asp-action="Index" class="btn btn-details">Back to List</a>
+        </div>
+    </div>
+</body>
+</html>

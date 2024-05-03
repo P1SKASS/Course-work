@@ -23,21 +23,19 @@ namespace Shop.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string login, string password)
         {
-            var users = _context.Users.Where(u => u.Login == login).ToList();
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == login && u.Password == password);
 
-            foreach (var user in users)
+            if (user != null)
             {
-                if (user.Password == password)
-                {
-                    HttpContext.Session.SetInt32("UserId", user.Id);
-                    HttpContext.Session.SetString("UserLogin", user.Login);
-                    return RedirectToAction("Index", "Products");
-                }
+                HttpContext.Session.SetInt32("UserId", user.Id);
+                HttpContext.Session.SetString("UserLogin", user.Login);
+                return RedirectToAction("Index", "Products");
             }
 
             TempData["ErrorMessage"] = "Wrong login or password.";
             return RedirectToAction("Login");
         }
+
 
         public IActionResult Logout()
         {

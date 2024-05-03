@@ -85,15 +85,36 @@ namespace Shop.Controllers
         {
             if (ModelState.IsValid)
             {
+                var existingUserWithLogin = await _context.Users.FirstOrDefaultAsync(u => u.Login == user.Login);
+                if (existingUserWithLogin != null)
+                {
+                    ModelState.AddModelError("Login", "A user with this login already exists.");
+                    return View(user);
+                }
+
+                var existingUserWithEmail = await _context.Users.FirstOrDefaultAsync(u => u.Mail == user.Mail);
+                if (existingUserWithEmail != null)
+                {
+                    ModelState.AddModelError("Mail", "A user with this email already exists.");
+                    return View(user);
+                }
+
+                if (user.Password.Length < 8 || !char.IsUpper(user.Password[0]))
+                {
+                    ModelState.AddModelError("Password", "Password must be at least 8 characters long and start with an uppercase letter.");
+                    return View(user);
+                }
+
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(user);
         }
 
         [Authorize]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit()
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
 
@@ -104,31 +125,16 @@ namespace Shop.Controllers
                 return NotFound();
             }
 
-            if (!user.Administrator)
-            {
-                id = userId;
-            }
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var EditUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
-
-            if (EditUser == null)
-            {
-                return NotFound();
-            }
-
-            return View(EditUser);
+            return View(user);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Login,Mail,Password,Entrepreneur")] User user)
+        public async Task<IActionResult> Edit([Bind("Id,Login,Mail,Password,Entrepreneur")] User user)
         {
-            if (id != user.Id)
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId != user.Id)
             {
                 return NotFound();
             }
@@ -151,10 +157,11 @@ namespace Shop.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { id = user.Id });
             }
             return View(user);
         }
+
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.Id == id);

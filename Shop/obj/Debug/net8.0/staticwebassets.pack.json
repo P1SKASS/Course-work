@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Shop.bundle.scp.css"
     },
     {
+      "Id": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\css\\home.css",
+      "PackagePath": "staticwebassets\\css\\home.css"
+    },
+    {
       "Id": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

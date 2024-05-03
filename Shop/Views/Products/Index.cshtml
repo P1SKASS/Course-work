@@ -1,48 +1,111 @@
 ﻿@model IEnumerable<Shop.Models.Product>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <style>
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-@{
-    ViewData["Title"] = "Index";
-}
+        .product-list-container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            width: 800px;
+            margin: 50px auto;
+        }
 
-<h1>Index</h1>
+        .product-actions a{
+        margin: 5px 0;
+        text-decoration: none;
+        color: #007bff;
+        cursor: pointer;
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+        }
 
-<p>
-    @if (ViewBag.LoggedInUser != null && (ViewBag.LoggedInUser.Entrepreneur || ViewBag.LoggedInUser.Administrator))
-    {
-        <a asp-action="Create">Create New</a>
-    }
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-        </tr>
-    </thead>
-    <tbopdy>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a asp-action="Buy" asp-route-id="@item.Id">Buy</a>
-            </td>
-        </tr>
-}
-    </tbopdy>
-</table>
+        .product-list{
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .product-list th,
+        .product-list td{
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .product-list th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .product-list tr:hover{
+            background-color: #f5f5f5;
+        }
+
+        .product-actions{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+        }
+
+         .product-actions a:hover{
+            background-color: #0056b3;
+            color: whitesmoke;
+         }
+    </style>
+</head>
+<body>
+    <div class="product-list-container">
+        <h1>Product</h1>
+        @if (ViewBag.LoggedInUser != null && (ViewBag.LoggedInUser.Entrepreneur || ViewBag.LoggedInUser.Administrator))
+        {
+            <a asp-action="Create" class="btn btn-primary">Add New Product</a>
+        }
+
+        <table class="product-list">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                        <td class="description">@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td class="product-actions">
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                            <a asp-action="Buy" asp-route-id="@item.Id">Buy</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

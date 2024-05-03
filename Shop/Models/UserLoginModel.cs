@@ -7,7 +7,7 @@ namespace Shop.Models
         [Required]
         public required string Login { get; set; }
 
-        [Required(ErrorMessage = "Enter password")]
+        [Required]
         [DataType(DataType.Password)]
         public required string Password { get; set; }
     }

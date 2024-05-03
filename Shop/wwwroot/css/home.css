@@ -1,0 +1,42 @@
+﻿.container-privacy h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container-privacy {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.container-privacy section {
+    margin-bottom: 30px;
+}
+
+.container-privacy h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.container-privacy ul {
+    margin-bottom: 10px;
+}
+
+.container-privacy ul li {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.container-privacy p {
+    margin-bottom: 10px;
+}
+
+.container-privacy a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.container-privacy a:hover {
+    text-decoration: underline;
+}
