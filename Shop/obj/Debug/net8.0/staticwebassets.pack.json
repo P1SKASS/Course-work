@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\css\\style.css"
     },
     {
+      "Id": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\image\\basket_icon.png",
+      "PackagePath": "staticwebassets\\image\\basket_icon.png"
+    },
+    {
       "Id": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\image\\facebook_icon.png",
       "PackagePath": "staticwebassets\\image\\facebook_icon.png"
     },

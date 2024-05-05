@@ -17,7 +17,6 @@ html {
   min-height: 100%;
 }
 
-
 header {
     background-color: #333;
     padding: 20px;
@@ -51,10 +50,13 @@ footer {
     width: 100%;
 }
 
+.basket{
+    height: 30px;
+}
+
 .icons {
     display: inline-block;
 }
-
 
 .icons li {
     display: inline-block;

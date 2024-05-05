@@ -4,16 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Order</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                Order number
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
@@ -24,6 +21,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.DeliveryDate)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPrice)
+            </th>
+            <td>
+                @Html.DisplayNameFor(model => model.PostOffice)
+            </td>
             <th></th>
         </tr>
     </thead>
@@ -44,9 +47,14 @@
                     @item.DeliveryDate.ToString("dd/MM/yyyy")
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostOffice)
+                </td>
+                <td>
+                    <a asp-controller="OrderItems" asp-action="Index">Details order</a>
+                    <a asp-action="CompletionOrder">Completion Order</a>
                 </td>
             </tr>
         }

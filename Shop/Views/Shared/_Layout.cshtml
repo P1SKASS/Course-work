@@ -21,13 +21,18 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
-                <ul class="navbar-nav">
-                    <li>
+                <ul class="navbar-nav align-items-center">
+                <li class=" pe-lg-2">
                     @{
                         var UserLogin = Context.Session.GetString("UserLogin");
                         var UserId = Context.Session.GetInt32("UserId");
                     }
-
+                    @if (UserId.HasValue)
+                    {
+                        <a id="basket" asp-controller="Orders" asp-action="Index"><img src="~/image/basket_icon.png" alt="Facebook" /></a>
+                    }
+                    </li>
+                    <li>
                     @if (!string.IsNullOrEmpty(UserLogin))
                     {
                         <a class="nav-link text-white" asp-controller="Users" asp-action="Details" asp-route-id="@UserId">@UserLogin</a>

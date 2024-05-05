@@ -8,6 +8,7 @@ namespace Shop.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<CreditCard> CreditCards { get; set; }
         public SiteContex(DbContextOptions<SiteContex> options)
             : base(options) 
         {

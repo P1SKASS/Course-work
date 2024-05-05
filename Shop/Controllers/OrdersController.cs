@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Shop.Models;
 using Shop.Attributes;
-using Newtonsoft.Json.Linq;
 
 namespace Shop.Controllers
 {
@@ -20,9 +19,31 @@ namespace Shop.Controllers
             _context = context;
         }
 
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Orders.ToListAsync());
+
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (!userId.HasValue)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var orderUser = await _context.Orders
+                .Where(oi => oi.UserId == userId)
+                .ToListAsync();
+
+            foreach (var order in orderUser)
+            {
+                order.TotalPrice = _context.OrderItems
+                    .Where(oi => oi.OrderId == order.Id)
+                    .Sum(oi => oi.Quantity * oi.Product.Price);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return View(orderUser);
         }
 
         [Authorize]
@@ -30,151 +51,77 @@ namespace Shop.Controllers
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
 
-            if (userId.HasValue)
+            if (!userId.HasValue)
             {
-                var user = _context.Users.FirstOrDefault(u => u.Id == userId);
-                var order = _context.Orders.FirstOrDefault(o => o.UserId == userId);
+                return RedirectToAction("Login", "Account");
+            }
 
-                var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var order = await _context.Orders.FirstOrDefaultAsync(o => o.UserId == userId);
 
-                if (product != null && ModelState.IsValid)
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                if (order == null)
                 {
-                    if (order == null)
+                    order = new Order
                     {
-                        order = new Order
-                        {
-                            UserId = userId.Value,
-                            Status = "Processing",
-                            Date = DateTime.Now,
-                            DeliveryDate = DateTime.Now.AddDays(5)
-                        };
-                        _context.Orders.Add(order);
-                    }
-                    else
-                    {
-                        order.Status = "Processing";
-                    }
-
-                    var productInOrder = await _context.OrderItems.FirstOrDefaultAsync(p => p.ProductId == id && p.Order.UserId == userId);
-
-                    if (productInOrder != null)
-                    {
-                        productInOrder.Quantity += 1;
-                    }
-                    else
-                    {
-                        var newOrderItem = new OrderItem
-                        {
-                            OrderId = order.Id,
-                            ProductId = id,
-                            Quantity = 1,
-                            UnitPrice = product.Price
-                        };
-
-                        _context.OrderItems.Add(newOrderItem);
-                    }
-
-                    await _context.SaveChangesAsync();
+                        UserId = userId.Value,
+                        Status = "Processing",
+                        Date = DateTime.Now,
+                        DeliveryDate = DateTime.Now.AddDays(5),
+                        PostOffice = "Not Indicated",
+                        TotalPrice = 0,
+                        CreditCardId = 0
+                    };
+                    _context.Orders.Add(order);
                 }
+                else
+                {
+                    order.Status = "Processing";
+                }
+
+                var productInOrder = await _context.OrderItems.FirstOrDefaultAsync(p => p.ProductId == id && p.Order.UserId == userId);
+
+                if (productInOrder != null)
+                {
+                    productInOrder.Quantity += 1;
+                }
+                else
+                {
+                    var newOrderItem = new OrderItem
+                    {
+                        OrderId = order.Id,
+                        ProductId = id,
+                        Quantity = 1,
+                        UnitPrice = product.Price
+                    };
+
+                    _context.OrderItems.Add(newOrderItem);
+                }
+
+                await _context.SaveChangesAsync();
             }
 
             return RedirectToAction("Index", "Products");
         }
 
-
-
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var order = await _context.Orders
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            return View(order);
-        }
-
         [Authorize]
-        public IActionResult Create()
+        public async Task<IActionResult> CompletionOrder()
         {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Status")] Order order)
-        {
-            if (ModelState.IsValid)
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (!userId.HasValue)
             {
-                _context.Add(order);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(order);
-        }
-
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
+                return RedirectToAction("Login", "Account");
             }
 
-            var order = await _context.Orders.FindAsync(id);
-            if (order == null)
-            {
-                return NotFound();
-            }
-            return View(order);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Status")] Order order)
-        {
-            if (id != order.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(order);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OrderExists(order.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(order);
-        }
-
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var order = await _context.Orders
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var order = await _context.Orders.FirstOrDefaultAsync(o => o.UserId == userId);
             if (order == null)
             {
                 return NotFound();
@@ -183,23 +130,50 @@ namespace Shop.Controllers
             return View(order);
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> CompletionOrder(Order order, string postOffice, string creditCardNumber, string expiryDate, string cvv)
         {
-            var order = await _context.Orders.FindAsync(id);
-            if (order != null)
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (!userId.HasValue)
             {
-                _context.Orders.Remove(order);
+                return RedirectToAction("Login", "Account");
             }
+
+            var existingOrder = await _context.Orders
+                .Include(o => o.CreditCard)
+                .FirstOrDefaultAsync(o => o.UserId == userId);
+
+            if (existingOrder == null)
+            {
+                return NotFound();
+            }
+
+            if (existingOrder.CreditCard != null)
+            {
+                existingOrder.CreditCard.CardNumber = creditCardNumber;
+                existingOrder.CreditCard.ExpiryDate = expiryDate;
+                existingOrder.CreditCard.CVV = cvv;
+            }
+            else
+            {
+                var creditCard = new CreditCard
+                {
+                    CardNumber = creditCardNumber,
+                    ExpiryDate = expiryDate,
+                    CVV = cvv
+                };
+
+                _context.CreditCards.Add(creditCard);
+                existingOrder.CreditCard = creditCard;
+            }
+
+            existingOrder.PostOffice = postOffice;
+            existingOrder.Status = "En route";
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
 
-        private bool OrderExists(int id)
-        {
-            return _context.Orders.Any(e => e.Id == id);
+            return RedirectToAction("Index", "Products");
         }
     }
 }

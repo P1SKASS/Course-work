@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZJXqNS7lVchU5KkwpYetSoSH+scIhCy+/oZuWLsERoM=",
+  "Hash": "oTbhJdv+arFKfEj5Y7izdhKkZVe+TNnxKRp4kS41ilc=",
   "Source": "Shop",
   "BasePath": "_content/Shop",
   "Mode": "Default",
@@ -110,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\style.css"
+    },
+    {
+      "Identity": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\image\\basket_icon.png",
+      "SourceId": "Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\",
+      "BasePath": "_content/Shop",
+      "RelativePath": "image/basket_icon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\image\\basket_icon.png"
     },
     {
       "Identity": "C:\\Program\\Unik lab\\Course-work\\Shop\\wwwroot\\image\\facebook_icon.png",
