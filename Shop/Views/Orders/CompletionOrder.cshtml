@@ -1,42 +1,58 @@
 ﻿@model Shop.Models.Order
 
-<h1>Completion Order</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Items</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/Shop.styles.css" />
+</head>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <form asp-action="CompletionOrder" method="post">
-                <div class="form-group">
-                    <label for="postOffice" class="control-label">Delivery Address</label>
-                    <select id="postOffice" name="postOffice" class="form-control">
-                        <optgroup label="Zhytomyr">
-                            <option value="Department1">Department1</option>
-                            <option value="Department2">Department2</option>
-                            <option value="Department3">Department3</option>
-                            <option value="Department4">Department4</option>
-                            <option value="Department5">Department5</option>
-                            <option value="Department6">Department6</option>
-                        </optgroup>
-                    </select>
-                    <span class="text-danger"></span>
+<body>
+    <div class="complete-order">
+        <h2>Completion Order</h2>
+
+        <div class="container container-complete">
+                <div class="col-md-6">
+                    <form asp-action="CompletionOrder" method="post">
+                      <input type="hidden" name="orderId" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="postOffice" class="control-label">Delivery Address</label>
+                            <select id="postOffice" name="postOffice" class="form-control">
+                                <optgroup label="Zhytomyr">
+                                    <option value="Department1">Department1</option>
+                                    <option value="Department2">Department2</option>
+                                    <option value="Department3">Department3</option>
+                                    <option value="Department4">Department4</option>
+                                    <option value="Department5">Department5</option>
+                                    <option value="Department6">Department6</option>
+                                </optgroup>
+                            </select>
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="CreditCardNumber" class="control-label">Credit Card Number</label>
+                            <input id="CreditCardNumber" name="creditCardNumber" class="form-control" placeholder="Enter credit card number" required />
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="ExpiryDate" class="control-label">Expiry Date</label>
+                            <input id="ExpiryDate" name="expiryDate" class="form-control" placeholder="Enter expiry date" required />
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="CVV" class="control-label">CVV</label>
+                            <input id="CVV" name="cvv" class="form-control" placeholder="Enter CVV" required />
+                            <span class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Complete Order</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="CreditCardNumber" class="control-label">Credit Card Number</label>
-                    <input id="CreditCardNumber" name="creditCardNumber" class="form-control" placeholder="Enter credit card number" required />
-                    <span class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label for="ExpiryDate" class="control-label">Expiry Date</label>
-                    <input id="ExpiryDate" name="expiryDate" class="form-control" placeholder="Enter expiry date" required />
-                    <span class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label for="CVV" class="control-label">CVV</label>
-                    <input id="CVV" name="cvv" class="form-control" placeholder="Enter CVV" required />
-                    <span class="text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-primary">Complete Order</button>
-            </form>
         </div>
     </div>
-</div>
+</body>
+</html>

@@ -53,8 +53,8 @@
                     @Html.DisplayFor(modelItem => item.PostOffice)
                 </td>
                 <td>
-                    <a asp-controller="OrderItems" asp-action="Index">Details order</a>
-                    <a asp-action="CompletionOrder">Completion Order</a>
+                    <a asp-controller="OrderItems" asp-action="Index" asp-route-id="@item.Id">Details order</a>
+                    <a asp-controller="Orders" asp-action="CompletionOrder" asp-route-orderId="@item.Id">Completion Order</a>
                 </td>
             </tr>
         }

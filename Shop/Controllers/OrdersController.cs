@@ -57,8 +57,6 @@ namespace Shop.Controllers
             }
 
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
-            var order = await _context.Orders.FirstOrDefaultAsync(o => o.UserId == userId);
-
             var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
             if (product == null)
@@ -68,30 +66,16 @@ namespace Shop.Controllers
 
             if (ModelState.IsValid)
             {
-                if (order == null)
-                {
-                    order = new Order
-                    {
-                        UserId = userId.Value,
-                        Status = "Processing",
-                        Date = DateTime.Now,
-                        DeliveryDate = DateTime.Now.AddDays(5),
-                        PostOffice = "Not Indicated",
-                        TotalPrice = 0,
-                        CreditCardId = 0
-                    };
-                    _context.Orders.Add(order);
-                }
-                else
-                {
-                    order.Status = "Processing";
-                }
+                var order = await _context.Orders
+                                           .Include(o => o.OrderItems)
+                                           .FirstOrDefaultAsync(o => o.UserId == userId && o.Status == "Processing");
 
-                var productInOrder = await _context.OrderItems.FirstOrDefaultAsync(p => p.ProductId == id && p.Order.UserId == userId);
 
-                if (productInOrder != null)
+                var existingOrderItem = order.OrderItems.FirstOrDefault(oi => oi.ProductId == id);
+
+                if (existingOrderItem != null)
                 {
-                    productInOrder.Quantity += 1;
+                    existingOrderItem.Quantity += 1;
                 }
                 else
                 {
@@ -108,12 +92,11 @@ namespace Shop.Controllers
 
                 await _context.SaveChangesAsync();
             }
-
             return RedirectToAction("Index", "Products");
         }
 
         [Authorize]
-        public async Task<IActionResult> CompletionOrder()
+        public async Task<IActionResult> CompletionOrder(int? orderId)
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (!userId.HasValue)
@@ -121,7 +104,10 @@ namespace Shop.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            var order = await _context.Orders.FirstOrDefaultAsync(o => o.UserId == userId);
+            var order = await _context.Orders
+                .Include(o => o.OrderItems)
+                .FirstOrDefaultAsync(o => o.UserId == userId && o.Id == orderId && o.Status == "Processing");
+
             if (order == null)
             {
                 return NotFound();
@@ -132,7 +118,7 @@ namespace Shop.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> CompletionOrder(Order order, string postOffice, string creditCardNumber, string expiryDate, string cvv)
+        public async Task<IActionResult> CompletionOrder(int orderId, string postOffice, string creditCardNumber, string expiryDate, string cvv)
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (!userId.HasValue)
@@ -142,7 +128,7 @@ namespace Shop.Controllers
 
             var existingOrder = await _context.Orders
                 .Include(o => o.CreditCard)
-                .FirstOrDefaultAsync(o => o.UserId == userId);
+                .FirstOrDefaultAsync(o => o.UserId == userId && o.Id == orderId && o.Status == "Processing");
 
             if (existingOrder == null)
             {

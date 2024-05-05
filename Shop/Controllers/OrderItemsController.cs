@@ -19,7 +19,7 @@ namespace Shop.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
 
@@ -28,10 +28,21 @@ namespace Shop.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
+            if (id == null)
+            {
+                return RedirectToAction("Index", "Orders");
+            }
+
+            bool isUserOrder = await _context.Orders.AnyAsync(o => o.Id == id && o.UserId == userId);
+            if (!isUserOrder)
+            {
+                return NotFound();
+            }
+
             var userOrderItems = await _context.OrderItems
                 .Include(oi => oi.Order)
                 .Include(oi => oi.Product)
-                .Where(oi => oi.Order.UserId == userId)
+                .Where(oi => oi.OrderId == id)
                 .ToListAsync();
 
             return View(userOrderItems);
@@ -40,13 +51,14 @@ namespace Shop.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var orderItem = await _context.OrderItems
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var orderItem = await _context.OrderItems.FirstOrDefaultAsync(m => m.Id == id);
 
             if (orderItem == null)
             {
@@ -62,8 +74,11 @@ namespace Shop.Controllers
                 orderItem.Quantity -= 1;
             }
 
+            int orderId = orderItem.OrderId;
+
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Index", new { id = orderId });
         }
     }
 }

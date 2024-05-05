@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Shop.Attributes;
@@ -209,33 +210,35 @@ namespace Shop.Controllers
 
             if (userId.HasValue)
             {
-                var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
                 if (user != null)
                 {
-                    var existingOrder = _context.Orders.FirstOrDefault(o => o.UserId == userId);
+                    var existingOrder = await _context.Orders
+                                                       .Where(o => o.UserId == userId && o.Status != "En route")
+                                                       .FirstOrDefaultAsync();
+
                     if (existingOrder == null)
                     {
-                        var newOrder = new Order
+                        existingOrder = new Order
                         {
                             UserId = (int)userId,
-                            Status = "New",
+                            Status = "Processing",
                             Date = DateTime.Now,
-                            DeliveryDate = DateTime.Now.AddDays(5)
+                            DeliveryDate = DateTime.Now.AddDays(5),
+                            TotalPrice = 0,
+                            PostOffice = "Not Indicated"
                         };
 
-                        _context.Orders.Add(newOrder);
+                        _context.Orders.Add(existingOrder);
                         await _context.SaveChangesAsync();
                     }
 
                     return RedirectToAction("PlaceOrder", "Orders", new { id = id });
                 }
             }
-
-            await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Products");
         }
-
 
         private bool ProductExists(int id)
         {

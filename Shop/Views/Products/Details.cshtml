@@ -36,7 +36,7 @@
             </dl>
         </div>
         <div>
-            @if (ViewBag.LoggedInUser != null && (ViewBag.LoggedInUser.Entrepreneur || ViewBag.LoggedInUser.Administrator))
+            @if (ViewBag.LoggedInUser != null && (ViewBag.LoggedInUser.Administrator))
             {
                 <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-details">Edit</a>
             }

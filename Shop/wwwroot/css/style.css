@@ -11,7 +11,29 @@
     margin: 50px auto;
 }
 
-.login-container h2, .new-user-container h2{
+.complete-order{
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 50px auto;
+}
+
+.complete-order h2{
+    text-align: center;
+}
+
+.container-complete div{
+    width: 250px;
+}
+
+.container-complete {
+    justify-content: center;
+    display: flex
+}
+
+.login-container h2, .new-user-container h2 {
     text-align: center;
     margin-bottom: 20px;
 }

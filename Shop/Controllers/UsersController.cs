@@ -22,25 +22,6 @@ namespace Shop.Controllers
             _context = context;
         }
 
-
-        [Authorize]
-        public async Task<IActionResult> Index(int Id)
-        {
-            int? userId = HttpContext.Session.GetInt32("UserId");
-
-            if (userId.HasValue)
-            {
-                var user = _context.Users.FirstOrDefault(u => u.Id == userId);
-
-                if (user.Administrator == true)
-                {
-                    return View(await _context.Users.ToListAsync());
-                }
-            }
-
-            return RedirectToAction("Create");
-        }
-
         [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
@@ -107,7 +88,7 @@ namespace Shop.Controllers
 
                 _context.Add(user);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Products");
             }
 
             return View(user);
@@ -137,6 +118,26 @@ namespace Shop.Controllers
             if (userId != user.Id)
             {
                 return NotFound();
+            }
+
+            var existingUserWithLogin = await _context.Users.FirstOrDefaultAsync(u => u.Login == user.Login && u.Id != user.Id);
+            if (existingUserWithLogin != null)
+            {
+                ModelState.AddModelError("Login", "A user with this login already exists.");
+                return View(user);
+            }
+
+            var existingUserWithEmail = await _context.Users.FirstOrDefaultAsync(u => u.Mail == user.Mail && u.Id != user.Id);
+            if (existingUserWithEmail != null)
+            {
+                ModelState.AddModelError("Mail", "A user with this email already exists.");
+                return View(user);
+            }
+
+            if (user.Password.Length < 8 || !char.IsUpper(user.Password[0]))
+            {
+                ModelState.AddModelError("Password", "Password must be at least 8 characters long and start with an uppercase letter.");
+                return View(user);
             }
 
             if (ModelState.IsValid)

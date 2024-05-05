@@ -1,44 +1,59 @@
 ﻿@model IEnumerable<Shop.Models.OrderItem>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Items</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/Shop.styles.css" />
+</head>
+<body>
+    <div class="details-container">
+        <h1>Order Items</h1>
 
-<h1>Index</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Product
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Unit Price
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitPrice)
+                        </td>
+                        <td>
+                            <a class="btn btn-details" asp-controller="Products" asp-action="Details" asp-route-id="@item.Product.Id">Details</a>
+                            @if (item.Order.Status != "En route")
+                            {
+                                <a class="btn btn-details" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Product)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitPrice)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Product.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitPrice)
-                </td>
-                <td>
-                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Product.Id">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
