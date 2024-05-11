@@ -1,62 +1,110 @@
 ﻿@model IEnumerable<Shop.Models.Order>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order List</title>
+    <style>
 
-<h1>Order</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Order number
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeliveryDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalPrice)
-            </th>
-            <td>
-                @Html.DisplayNameFor(model => model.PostOffice)
-            </td>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @item.Date.ToString("dd/MM/yyyy")
-                </td>
-                <td>
-                    @item.DeliveryDate.ToString("dd/MM/yyyy")
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PostOffice)
-                </td>
-                <td>
-                    <a asp-controller="OrderItems" asp-action="Index" asp-route-id="@item.Id">Details order</a>
-                    <a asp-controller="Orders" asp-action="CompletionOrder" asp-route-orderId="@item.Id">Completion Order</a>
-                </td>
-            </tr>
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-    </tbody>
-</table>
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .actions {
+            text-align: center;
+        }
+
+        .actions a {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .actions a:hover {
+            background-color: #0056b3;
+            color: whitesmoke;
+        }
+    </style>
+</head>
+<body>
+        <h1>Order List</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Order Number</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Delivery Date</th>
+                    <th>Total Price</th>
+                    <th>Post Office</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>№@Html.DisplayFor(modelItem => item.Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td>@item.Date.ToString("dd/MM/yyyy")</td>
+                        <td>@item.DeliveryDate.ToString("dd/MM/yyyy")</td>
+                        <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PostOffice)</td>
+                        <td class="actions">
+                            <a asp-controller="OrderItems" asp-action="Index" asp-route-id="@item.Id">Details</a>
+                            @if (item.CreditCardId == null)
+                            {
+                                @if(item.OrderItems == null)
+                                {
+                                    <p>cart is empty</p>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Orders" asp-action="CompletionOrder" asp-route-orderId="@item.Id">Completion Order</a>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</body>
+</html>

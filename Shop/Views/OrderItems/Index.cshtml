@@ -9,6 +9,68 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/Shop.styles.css" />
+    <style>
+        .details-container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            width: 800px;
+            margin: 50px auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .btn-details {
+            display: inline-block;
+            margin-right: 5px;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-details:hover {
+                background-color: #0056b3;
+                color: whitesmoke;
+         }
+
+        .back-to-orders {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .detalis-accion{
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <div class="details-container">
@@ -42,7 +104,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.UnitPrice)
                         </td>
-                        <td>
+                        <td class="detalis-accion">
                             <a class="btn btn-details" asp-controller="Products" asp-action="Details" asp-route-id="@item.Product.Id">Details</a>
                             @if (item.Order.Status != "En route")
                             {
@@ -54,6 +116,10 @@
                 }
             </tbody>
         </table>
+
+        <div class="back-to-orders">
+            <a class="btn btn-details" asp-controller="Orders" asp-action="Index">Back to Orders</a>
+        </div>
     </div>
 </body>
 </html>
