@@ -54,7 +54,6 @@ namespace Shop.Controllers
             return View(detailsUser);
         }
 
-
         public IActionResult Create()
         {
             return View();
@@ -88,6 +87,8 @@ namespace Shop.Controllers
 
                 _context.Add(user);
                 await _context.SaveChangesAsync();
+                HttpContext.Session.SetInt32("UserId", user.Id);
+                HttpContext.Session.SetString("UserLogin", user.Login);
                 return RedirectToAction("Index", "Products");
             }
 

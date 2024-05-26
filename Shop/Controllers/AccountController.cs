@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop.Models;
-using System;
-using System.Threading.Tasks;
 
 namespace Shop.Controllers
 {

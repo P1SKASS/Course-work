@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Shop.Models;
 using Shop.Attributes;
+using Shop.Models;
 
 namespace Shop.Controllers
 {
@@ -70,6 +65,10 @@ namespace Shop.Controllers
                                            .Include(o => o.OrderItems)
                                            .FirstOrDefaultAsync(o => o.UserId == userId && o.Status == "Processing");
 
+                if (order == null)
+                {
+                    return NotFound();
+                }
 
                 var existingOrderItem = order.OrderItems.FirstOrDefault(oi => oi.ProductId == id);
 

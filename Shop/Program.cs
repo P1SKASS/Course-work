@@ -1,14 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Shop.Models;
-using System;
-using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +27,7 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<SiteContex>();
     var users = context.Users.ToList();
 
-        Console.WriteLine("Users:");
+    Console.WriteLine("Users:");
     foreach (var user in users)
     {
         Console.WriteLine($"Id: {user.Id}, Login: {user.Login}," +

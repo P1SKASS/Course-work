@@ -58,7 +58,6 @@ C:\Program\Unik lab\Course-work\Shop\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Program\Unik lab\Course-work\Shop\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Program\Unik lab\Course-work\Shop\obj\Debug\net8.0\scopedcss\bundle\Shop.styles.css
 C:\Program\Unik lab\Course-work\Shop\obj\Debug\net8.0\scopedcss\projectbundle\Shop.bundle.scp.css
-C:\Program\Unik lab\Course-work\Shop\obj\Debug\net8.0\Shop.csproj.CopyComplete
 C:\Program\Unik lab\Course-work\Shop\obj\Debug\net8.0\Shop.dll
 C:\Program\Unik lab\Course-work\Shop\obj\Debug\net8.0\refint\Shop.dll
 C:\Program\Unik lab\Course-work\Shop\obj\Debug\net8.0\Shop.pdb
@@ -262,3 +261,4 @@ C:\Program\Unik lab\Course-work\Shop\bin\Debug\net8.0\runtimes\win\lib\net7.0\Mi
 C:\Program\Unik lab\Course-work\Shop\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Program\Unik lab\Course-work\Shop\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Program\Unik lab\Course-work\Shop\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
+C:\Program\Unik lab\Course-work\Shop\obj\Debug\net8.0\Shop.csproj.Up2Date
