@@ -24,43 +24,43 @@
             margin: 50px auto;
         }
 
-        .product-actions a{
-        margin: 5px 0;
-        text-decoration: none;
-        color: #007bff;
-        cursor: pointer;
-        display: inline-block;
-        padding: 8px 16px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
+        .product-actions a {
+            margin: 5px 0;
+            text-decoration: none;
+            color: #007bff;
+            cursor: pointer;
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
         }
 
-        .product-list{
+        .product-list {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
 
-        .product-list th,
-        .product-list td{
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
+            .product-list th,
+            .product-list td {
+                padding: 10px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
 
-        .product-list th {
-            background-color: #f2f2f2;
-            color: #333;
-        }
+            .product-list th {
+                background-color: #f2f2f2;
+                color: #333;
+            }
 
-        .product-list tr:hover{
-            background-color: #f5f5f5;
-        }
+            .product-list tr:hover {
+                background-color: #f5f5f5;
+            }
 
-        .product-actions{
+        .product-actions {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -68,11 +68,47 @@
             height: 100%;
         }
 
-         .product-actions a:hover{
-            color: whitesmoke;
-            background-color: #0056b3;
-         }
+            .product-actions a:hover {
+                color: whitesmoke;
+                background-color: #0056b3;
+            }
+
+        #productSearch {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+            #productSearch:focus {
+                outline: none;
+                border-color: #007bff;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
     </style>
+    <script>
+        function searchProducts() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("productSearch");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("productTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="product-list-container">
@@ -82,7 +118,9 @@
             <a asp-action="Create" class="btn btn-primary">Add New Product</a>
         }
 
-        <table class="product-list">
+        <input type="text" id="productSearch" onkeyup="searchProducts()" placeholder="Search for products..">
+
+        <table class="product-list" id="productTable">
             <thead>
                 <tr>
                     <th>Product Name</th>

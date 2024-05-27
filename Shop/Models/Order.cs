@@ -15,7 +15,6 @@ namespace Shop.Models
         public CreditCard CreditCard { get; set; }
         public ICollection<OrderItem> OrderItems { get; set; }
 
-
         public Order() => OrderItems = new List<OrderItem>();
     }
 }
