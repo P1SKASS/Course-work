@@ -1,12 +1,88 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Program\\Unik lab\\Course-work\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D477EACA-3A38-4238-A701-D3466E59CEAD}|Shop\\Shop.csproj|c:\\program\\unik lab\\course-work\\shop\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D477EACA-3A38-4238-A701-D3466E59CEAD}|Shop\\Shop.csproj|solutionrelative:shop\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D477EACA-3A38-4238-A701-D3466E59CEAD}|Shop\\Shop.csproj|c:\\program\\unik lab\\course-work\\shop\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D477EACA-3A38-4238-A701-D3466E59CEAD}|Shop\\Shop.csproj|solutionrelative:shop\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D477EACA-3A38-4238-A701-D3466E59CEAD}|Shop\\Shop.csproj|c:\\program\\unik lab\\course-work\\shop\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D477EACA-3A38-4238-A701-D3466E59CEAD}|Shop\\Shop.csproj|solutionrelative:shop\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D477EACA-3A38-4238-A701-D3466E59CEAD}|Shop\\Shop.csproj|c:\\program\\unik lab\\course-work\\shop\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D477EACA-3A38-4238-A701-D3466E59CEAD}|Shop\\Shop.csproj|solutionrelative:shop\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Program\\Unik lab\\Course-work\\Shop\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Shop\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Program\\Unik lab\\Course-work\\Shop\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Shop\\Controllers\\AccountController.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAA1wCIAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T13:30:20.498Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Program\\Unik lab\\Course-work\\Shop\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "Shop\\Views\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Program\\Unik lab\\Course-work\\Shop\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "Shop\\Views\\Account\\Login.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-27T13:30:11.263Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrdersController.cs",
+              "DocumentMoniker": "C:\\Program\\Unik lab\\Course-work\\Shop\\Controllers\\OrdersController.cs",
+              "RelativeDocumentMoniker": "Shop\\Controllers\\OrdersController.cs",
+              "ToolTip": "C:\\Program\\Unik lab\\Course-work\\Shop\\Controllers\\OrdersController.cs",
+              "RelativeToolTip": "Shop\\Controllers\\OrdersController.cs",
+              "ViewState": "AQIAAIwAAAAAAAAAAAAiwJwAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T12:21:10.402Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Program\\Unik lab\\Course-work\\Shop\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "Shop\\Models\\Order.cs",
+              "ToolTip": "C:\\Program\\Unik lab\\Course-work\\Shop\\Models\\Order.cs",
+              "RelativeToolTip": "Shop\\Models\\Order.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAQwBQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T12:21:08.271Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
